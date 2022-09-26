@@ -1,0 +1,18 @@
+Instrukcja instalacji i uruchomienia (na systemie linux/unix)
+Należy przejść do folderu, który powstał po wypakowaniu archiwum.
+Uruchomić projekt za pomocą komendy:
+java -jar Wypozyczalnia.jar
+
+Opis wykorzystanej technologii
+Program został napisany w języku Java, który jest językiem wysokiego poziomu stworzonym przez Sun Microsystems. Głównym założeniem przy tworzeniu tego języka była możliwość uruchomienia go na dowolnej maszynie. Stało się to możliwe dzięki Java Virtual Machine (JVM). Składnia języka Java jest zbliżona do języka C++. Java jest językiem obiektowym, który umożliwia dziedziczenie.
+GUI
+W celu stworzenia interfejsu użytkownika wykorzystałem biblioteki Swing. Klasy odpowiedzialne za wyświetlanie okien aplikacji rozszerzają klasę JFrame. W oknie głównym wykorzystałem obiekt JTabbedPane, który tworzy panel zakładek. Na każdej zakładce znajduje się obiekt JPanel, do których następnie dodaję potrzebne komponenty.
+
+Wykorzystanie Baz Danych
+Do przetrzymywania informacji wykorzystałem SqlLite ze względu na łatwość jej konfiguracji. Niestety jej głównym ograniczeniem jest możliwość tylko jednego połączenia na raz. W bazie danych stworzyłem 5 tabel: Uzytkownicy, Adres, Pracownicy, Samochody, Umowy. Tabela są między sobą połączone za pomoc kluczy obcych. Połączenie z bazą danych nawiązywane jest za pomocą JDBC, które korzysta z implementacji dostarczonej w sqlite-jdbc-3.8.11.2.jar.
+
+Wykorzystanie wątków
+Wątek wykorzystuję do aktualizacji czasu w oknie głównym programu. W celu stworzenia nowego wątku potrzebna jest klasa, która dziedziczy z klasy Thread. Ja stworzyłem klasę OdswiezanieCzasu, która dodatkowo nadpisuje metodę Run. W klasie okna głównego stworzyłem obiekt typu OdswiezanieCzasu, a następnie wywołałem na nim metodę start.
+
+Wykorzystanie programowania obiektowego.
+Każdy z obiektów danych został odzwierciedlony w programie. Klasy Adres, Pracownik, Uzytkownik, Samochod, Umowa oraz Uzytkownik odpowiadają tabelą Adres, Uzytkownicy, Samochody, Umowy, Uzytkownicy. Przy odczycie danych z bazy danych tworzone są odpowiednie obiekty. Kolejnym przykładem wykorzystania obiektowości jest rozszerzanie klas JFrame oraz Uzytkownik.
